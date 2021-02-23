@@ -1,7 +1,7 @@
 {
   "name": "@generates/skrt",
   "version": "0.0.0",
-  "description": "A React static site generator (SSG) with launch control",
+  "description": "A React/MDX static site generator (SSG) with launch control",
   "author": {
     "name": "Ian Walter",
     "url": "https://ianwalter.dev"
@@ -16,6 +16,7 @@
     "@generates/logger": "^0.1.2",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "glob": "^7.1.6",
     "pirates": "^4.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"

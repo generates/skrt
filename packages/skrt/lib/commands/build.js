@@ -1,33 +1,14 @@
+import util from 'util'
 import path from 'path'
-import { promises as fs } from 'fs'
-import { createRequire } from 'module'
+import { promises as fs, mkdirSync } from 'fs'
 import { createLogger } from '@generates/logger'
-import { addHook } from 'pirates'
-import mdx from '@mdx-js/mdx'
-import babel from '@babel/core'
-import React from 'react'
-import ReactDOMServer from 'react-dom/server.node.js'
+import glob from 'glob'
+import render from '../render.js'
 
+const ignore = 'node_modules/**'
+const globOptions = { nosort: true, nodir: true, ignore, absolute: true }
+const globAsync = util.promisify(glob)
 const logger = createLogger({ level: 'info', namespace: 'skrt.build' })
-const babelOptions = {
-  presets: [
-    [
-      '@babel/preset-env',
-      { targets: { node: 'current' } }
-    ],
-    '@babel/preset-react'
-  ]
-}
-const require = createRequire(import.meta.url)
-
-addHook(
-  content => {
-    const jsx = "import { mdx } from '@mdx-js/react'\n" + mdx.sync(content)
-    const { code } = babel.transformSync(jsx, babelOptions)
-    return code
-  },
-  { exts: ['.mdx'], ignoreNodeModules: true }
-)
 
 export default async function build (input) {
   let [srcDir, destDir] = input.args
@@ -35,8 +16,11 @@ export default async function build (input) {
 
   let srcFiles
   try {
+    //
     srcDir = path.resolve(srcDir)
-    srcFiles = await fs.readdir(srcDir)
+
+    //
+    srcFiles = await globAsync(`${srcDir}/**/*.mdx`, globOptions)
   } catch (err) {
     if (err.code === 'ENOENT') {
       throw new Error(`Source directory '${srcDir}' not found.`)
@@ -51,16 +35,24 @@ export default async function build (input) {
     throw new Error('You must specify a valid destination directory.')
   }
 
-  // Create the destination directory if it doesn't exist.
+  // Clear the destination directory.
 
-  //
+  logger.debug('Source files', srcFiles)
+
   await Promise.all(srcFiles.map(async file => {
-    const srcFile = path.join(srcDir, file)
-    logger.debug('Source file', srcFile)
-    const { default: page } = require(srcFile)
-    const element = React.createElement(page)
-    const html = ReactDOMServer.renderToStaticMarkup(element)
-    const filename = path.basename(file, '.mdx') + '.html'
-    await fs.writeFile(path.join(destDir, filename), html)
+    try {
+      //
+      const html = render(file)
+
+      //
+      const dir = path.join(destDir, path.relative(srcDir, path.dirname(file)))
+      mkdirSync(dir, { recursive: true })
+
+      //
+      const filename = path.basename(file, '.mdx') + '.html'
+      await fs.writeFile(path.join(dir, filename), html)
+    } catch (err) {
+      logger.error(err)
+    }
   }))
 }

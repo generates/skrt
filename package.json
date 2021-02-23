@@ -10,5 +10,23 @@
   "license": "SEE LICENSE IN LICENSE",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@ianwalter/eslint-config": "^6.2.0",
+    "eslint": "^7.20.0"
+  },
+  "renovate": {
+    "extends": [
+      "@ianwalter"
+    ]
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@ianwalter"
+    ]
+  }
 }
