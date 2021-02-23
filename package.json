@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "skrt",
+  "version": "1.0.0",
+  "description": "An easy-to-handle static site generator (SSG)",
+  "author": {
+    "name": "Ian Walter",
+    "url": "https://ianwalter.dev"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "workspaces": [
+    "packages/*"
+  ]
+}
