@@ -35,9 +35,28 @@ export default async function build (input) {
     throw new Error('You must specify a valid destination directory.')
   }
 
-  // Clear the destination directory.
-
   logger.debug('Source files', srcFiles)
+
+  // Clear the destination directory.
+  if (srcFiles.length) {
+    const allFiles = await globAsync(`${destDir}/**/*.html`, globOptions)
+    const [files, dirs] = allFiles.reduce(
+      (acc, file) => {
+        const dir = path.dirname(file)
+        if (dir === destDir) {
+          acc[0].push(file) // Root file.
+        } else {
+          acc[1].add(dir) // Nested directory.
+        }
+        return acc
+      },
+      [[], new Set([])]
+    )
+    await Promise.all([
+      ...files.map(file => fs.rm(file)),
+      ...Array.from(dirs).map(dir => fs.rmdir(dir, { recursive: true }))
+    ])
+  }
 
   await Promise.all(srcFiles.map(async file => {
     try {
