@@ -16,6 +16,7 @@
     "@generates/logger": "^0.1.2",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "browser-sync": "^2.26.14",
     "glob": "^7.1.6",
     "pirates": "^4.0.1",
     "polka": "^0.5.2",

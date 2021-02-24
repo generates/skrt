@@ -3,7 +3,7 @@ import path from 'path'
 import { promises as fs, mkdirSync } from 'fs'
 import { createLogger } from '@generates/logger'
 import glob from 'glob'
-import render from '../render.js'
+import buildFile from '../buildFile.js'
 
 const ignore = 'node_modules/**'
 const globOptions = { nosort: true, nodir: true, ignore, absolute: true }
@@ -11,13 +11,14 @@ const globAsync = util.promisify(glob)
 const logger = createLogger({ level: 'info', namespace: 'skrt.build' })
 
 export default async function build (input) {
-  let [srcDir, destDir] = input.args
-  logger.debug('Build args', { srcDir, destDir })
+  const [src, dest] = input.args
+  logger.debug('Build args', { src, dest })
 
+  let srcDir
   let srcFiles
   try {
     //
-    srcDir = path.resolve(srcDir)
+    srcDir = path.resolve(src)
 
     //
     srcFiles = await globAsync(`${srcDir}/**/*.mdx`, globOptions)
@@ -29,8 +30,9 @@ export default async function build (input) {
   }
 
   // Make sure the destination directory was specified.
+  let destDir
   try {
-    destDir = path.resolve(destDir)
+    destDir = path.resolve(dest)
   } catch (err) {
     throw new Error('You must specify a valid destination directory.')
   }
@@ -60,18 +62,15 @@ export default async function build (input) {
 
   await Promise.all(srcFiles.map(async file => {
     try {
-      //
-      const html = render(file)
-
-      //
-      const dir = path.join(destDir, path.relative(srcDir, path.dirname(file)))
-      mkdirSync(dir, { recursive: true })
-
-      //
-      const filename = path.basename(file, '.mdx') + '.html'
-      await fs.writeFile(path.join(dir, filename), html)
+      await buildFile(srcDir, destDir, file)
     } catch (err) {
       logger.error(err)
     }
   }))
+
+  process.stdout.write('\n')
+  logger.success(`Built files from ${src} to ${dest}!`)
+  process.stdout.write('\n')
+
+  return { srcDir, destDir }
 }
