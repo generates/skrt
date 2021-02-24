@@ -8,10 +8,16 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "type": "module",
+  "scripts": {
+    "build": "./cli.js build tests/fixtures/src tests/fixtures/out"
+  },
   "dependencies": {
     "@babel/core": "^7.13.1",
+    "@babel/generator": "^7.13.0",
+    "@babel/parser": "^7.13.4",
     "@babel/preset-env": "^7.13.0",
     "@babel/preset-react": "^7.12.13",
+    "@babel/traverse": "^7.13.0",
     "@generates/cli": "^1.0.1",
     "@generates/logger": "^0.1.2",
     "@mdx-js/mdx": "^1.6.22",
@@ -22,6 +28,7 @@
     "polka": "^0.5.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "sirv": "^1.0.11"
+    "sirv": "^1.0.11",
+    "unist-util-visit": "^2.0.3"
   }
 }

@@ -1,12 +1,13 @@
 import path from 'path'
 import { createRequire } from 'module'
+import { promises as fs, mkdirSync } from 'fs'
 import { createLogger } from '@generates/logger'
 import { addHook } from 'pirates'
 import mdx from '@mdx-js/mdx'
 import babel from '@babel/core'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server.node.js'
-import { promises as fs, mkdirSync } from 'fs'
+import extractDataPlugin from './extractDataPlugin.js'
 
 const babelOptions = {
   presets: [
@@ -19,14 +20,23 @@ const babelOptions = {
 }
 const logger = createLogger({ level: 'info', namespace: 'skrt.build' })
 const require = createRequire(import.meta.url)
+const mdxImport = "import { mdx } from '@mdx-js/react'\n"
+const data = {}
 
 //
 addHook(
   (content, file) => {
-    const jsx = path.extname(file) === '.mdx'
-      ? "import { mdx } from '@mdx-js/react'\n" + mdx.sync(content)
-      : content
-    const { code } = babel.transformSync(jsx, babelOptions)
+    if (path.extname(file) === '.mdx') {
+      //
+      data[file] = {}
+
+      //
+      const opts = { remarkPlugins: [extractDataPlugin(data[file])] }
+
+      //
+      content = mdxImport + mdx.sync(content, opts)
+    }
+    const { code } = babel.transformSync(content, babelOptions)
     return code
   },
   { exts: ['.jsx', '.mdx'] }
@@ -42,13 +52,17 @@ export default async function buildFile (srcDir, destDir, file) {
   delete require.cache[file]
 
   //
+  const props = data[file]
+  logger.debug('Props', props)
+
+  //
   const { default: layout } = require('./layouts/base.jsx')
 
   //
-  const element = React.createElement(layout, {}, React.createElement(content))
+  const page = React.createElement(layout, props, React.createElement(content))
 
   //
-  const html = ReactDOMServer.renderToStaticMarkup(element)
+  const html = ReactDOMServer.renderToStaticMarkup(page)
 
   //
   const dir = path.join(destDir, path.relative(srcDir, path.dirname(file)))
