@@ -56,7 +56,7 @@ export default async function buildFile (srcDir, destDir, file) {
 
   //
   const filename = path.join(dir, path.basename(file, '.mdx') + '.html')
-  await fs.writeFile(filename, html)
+  await fs.writeFile(filename, `<!doctype html>${html}`)
 
   return filename
 }
