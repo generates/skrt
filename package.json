@@ -17,6 +17,7 @@
     "watch": "skrt watch docs site"
   },
   "dependencies": {
+    "@changesets/cli": "^2.14.1",
     "@ianwalter/eslint-config": "^6.2.0",
     "eslint": "^7.20.0"
   },
