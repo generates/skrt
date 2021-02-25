@@ -1,0 +1,93 @@
+# skrt.css
+> A base stylesheet for the [skrt][skrtUrl] static site generator
+
+The styles are derived from the utility-first [Tailwind CSS][twUrl] framework.
+This allows nearly unlimited flexibility while prototyping websites. However,
+unlike Tailwind, Destination also applies styles from the
+[Tailwind Typography][ttUrl] plugin directly to certain HTML elements. You can
+still modify most of the base styles by adding utility classes but the base
+styles are meant to free you from having to do that. You can see the Tailwind
+Typography [demo using Destination here](/demo).
+
+[twUrl]: https://tailwindcss.com/
+[ttUrl]: https://tailwindcss-typography.netlify.app/
+
+Destination is meant to be used when presentation and effort matter more than
+bandwidth so it's probably pretty large compared to other style sheets you're
+used to (97KB gzipped). You can reduce the size if necessary by purging unused
+styles but in most cases it's meant to be loaded via CDN:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/@ianwalter/destination@{% meta 'version' %}/destination.min.css">
+```
+
+Destination will also contain some basic component classes in addition to the
+ones provided by Tailwind.
+
+## Buttons
+
+### Default Button
+
+```html
+<button className="button">
+  Button Label
+</button>
+```
+
+<div className="w-48 md:w-56 text-center pt-2">
+  <button className="button">
+    Button Label
+  </button>
+  <div className="pt-2">
+    <code>button</code>
+  </div>
+</div>
+
+### Color Variants
+
+```html
+<a className="button button-blue">
+  Button Label
+</a>
+```
+
+<div className="grid grid-cols-3 gap-8 pt-2">
+  <div className="col-span-3 md:col-span-1">
+    <div className="w-48 md:w-56 text-center">
+      <a href="#" className="button button-blue" role="button">
+        Button Label
+      </a>
+      <div className="pt-2">
+        <code>button-blue</code>
+      </div>
+    </div>
+  </div>
+  <div className="col-span-3 md:col-span-1">
+    <div className="w-48 md:w-56 text-center">
+      <a href="#" className="button button-red" role="button">
+        Button Label
+      </a>
+      <div className="pt-2">
+        <code>button-red</code>
+      </div>
+    </div>
+  </div>
+  <div className="col-span-3 md:col-span-1">
+    <div className="w-48 md:w-56 text-center">
+      <a href="#" className="button button-green" role="button">
+        Button Label
+      </a>
+      <div className="pt-2">
+        <code>button-green</code>
+      </div>
+    </div>
+  </div>
+</div>
+
+## Banners
+
+&nbsp;
+
+Created by [Ian Walter](https://ianwalter.dev)
+
+[skrtUrl]: https://skrt.generates.io

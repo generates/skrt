@@ -6,6 +6,7 @@ import { addHook } from 'pirates'
 import mdx from '@mdx-js/mdx'
 import babel from '@babel/core'
 import React from 'react'
+import remarkPrism from 'remark-prism'
 import ReactDOMServer from 'react-dom/server.node.js'
 import extractDataPlugin from './extractDataPlugin.js'
 
@@ -31,7 +32,9 @@ addHook(
       data[file] = {}
 
       //
-      const opts = { remarkPlugins: [extractDataPlugin(data[file])] }
+      const opts = {
+        remarkPlugins: [extractDataPlugin(data[file]), remarkPrism]
+      }
 
       //
       content = mdxImport + mdx.sync(content, opts)
@@ -42,21 +45,26 @@ addHook(
   { exts: ['.jsx', '.mdx'] }
 )
 
-export default async function buildFile (srcDir, destDir, file) {
+export default async function buildFile (input, srcDir, outDir, file) {
   logger.debug('Build file', file)
 
   //
   const { default: content } = require(file)
 
   //
-  delete require.cache[file]
-
-  //
-  const props = data[file]
+  const props = { input, ...data[file] }
   logger.debug('Props', props)
 
   //
-  const { default: layout } = require('./layouts/base.jsx')
+  const layoutName = props.layout || input.layout
+  const layoutFile = ['base', 'skrt', 'docs'].includes(layoutName)
+    ? require.resolve(`./layouts/${layoutName}.jsx`)
+    : path.resolve(input.layouts, layoutName)
+  const layout = require(layoutFile).default
+
+  //
+  delete require.cache[file]
+  delete require.cache[layoutFile]
 
   //
   const page = React.createElement(layout, props, React.createElement(content))
@@ -65,7 +73,7 @@ export default async function buildFile (srcDir, destDir, file) {
   const html = ReactDOMServer.renderToStaticMarkup(page)
 
   //
-  const dir = path.join(destDir, path.relative(srcDir, path.dirname(file)))
+  const dir = path.join(outDir, path.relative(srcDir, path.dirname(file)))
   mkdirSync(dir, { recursive: true })
 
   //

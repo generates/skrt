@@ -20,6 +20,22 @@ const input = cli({
     serve: {
       run: skrt.serve
     }
+  },
+  options: {
+    layout: {
+      aliases: ['l'],
+      description: 'The default layout to use',
+      default: 'base'
+    },
+    layouts: {
+      description: 'The directory to use for custom layouts',
+      default: ''
+    },
+    stylesheet: {
+      description: 'A URL for a stylsheet to be used with a layout',
+      // default: 'https://unpkg.com/@generates/skrt@1.0.0/skrt.min.css'
+      default: 'https://unpkg.com/@ianwalter/destination@1.0.2/destination.min.css'
+    }
   }
 })
 

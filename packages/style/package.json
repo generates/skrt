@@ -1,0 +1,56 @@
+{
+  "name": "@generates/style",
+  "version": "1.0.2",
+  "description": "A style sheet that makes website prototypes look beautiful",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "Ian Walter",
+    "url": "https://ianwalter.dev"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "build.skrt": "postcss src/skrt.css -o site/skrt.css",
+    "copy.skrt": "cp site/skrt.css skrt.css",
+    "minify.skrt": "csso -i skrt.css -o skrt.min.css",
+    "watch.skrt": "yarn build.skrt --watch",
+    "build.docs": "skrt build docs site",
+    "watch.docs": "skrt watch docs site",
+    "build": "NODE_ENV=production run-s build.docs build.skrt copy.skrt minify.skrt",
+    "start": "run-p watch.docs watch.skrt"
+  },
+  "files": [
+    "skrt.css",
+    "skrt.min.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "css",
+    "style",
+    "sheet",
+    "tailwind",
+    "tailwindcss",
+    "library"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianwalter/destination.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ianwalter/destination/issues"
+  },
+  "homepage": "https://github.com/ianwalter/destination#readme",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.4.0",
+    "csso-cli": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^8.0.0",
+    "tailwindcss": "^2.0.3"
+  },
+  "skrt": {
+    "layout": "docs",
+    "layouts": "../skrt/lib/layouts",
+    "stylesheet": "/skrt.css"
+  }
+}

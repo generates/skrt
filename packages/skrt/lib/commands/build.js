@@ -11,8 +11,8 @@ const globAsync = util.promisify(glob)
 const logger = createLogger({ level: 'info', namespace: 'skrt.build' })
 
 export default async function build (input) {
-  const [src, dest] = input.args
-  logger.debug('Build args', { src, dest })
+  const [src, out] = input.args
+  logger.debug('Build args', { src, out })
 
   let srcDir
   let srcFiles
@@ -30,9 +30,9 @@ export default async function build (input) {
   }
 
   // Make sure the destination directory was specified.
-  let destDir
+  let outDir
   try {
-    destDir = path.resolve(dest)
+    outDir = path.resolve(out)
   } catch (err) {
     throw new Error('You must specify a valid destination directory.')
   }
@@ -41,11 +41,11 @@ export default async function build (input) {
 
   // Clear the destination directory.
   if (srcFiles.length) {
-    const allFiles = await globAsync(`${destDir}/**/*.html`, globOptions)
+    const allFiles = await globAsync(`${outDir}/**/*.html`, globOptions)
     const [files, dirs] = allFiles.reduce(
       (acc, file) => {
         const dir = path.dirname(file)
-        if (dir === destDir) {
+        if (dir === outDir) {
           acc[0].push(file) // Root file.
         } else {
           acc[1].add(dir) // Nested directory.
@@ -60,17 +60,17 @@ export default async function build (input) {
     ])
   }
 
-  await Promise.all(srcFiles.map(async file => {
+  const outFiles = await Promise.all(srcFiles.map(async file => {
     try {
-      await buildFile(srcDir, destDir, file)
+      return buildFile(input, srcDir, outDir, file)
     } catch (err) {
       logger.error(err)
     }
   }))
 
   process.stdout.write('\n')
-  logger.success(`Built files from ${src} to ${dest}!`)
+  logger.success(`Built files from ${src} to ${out}!`)
   process.stdout.write('\n')
 
-  return { srcDir, destDir }
+  return { srcDir, outDir, outFiles }
 }
