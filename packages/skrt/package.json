@@ -13,10 +13,7 @@
     "skrt": "cli.js"
   },
   "scripts": {
-    "build": "./cli.js build tests/fixtures/src tests/fixtures/out",
-    "build:css": "postcss style/skrt.css -o ../../site/skrt.css",
-    "minify": "csso -i skrt.css -o skrt.min.css",
-    "dev": "yarn build:css --watch"
+    "build": "./cli.js build tests/fixtures/src tests/fixtures/out"
   },
   "dependencies": {
     "@babel/core": "^7.13.1",

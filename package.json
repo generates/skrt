@@ -13,7 +13,9 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "build": "skrt build docs site",
+    "copy.css": "cp packages/styles/skrt.min.css site",
+    "build.docs": "skrt build docs site",
+    "build": "run-p build.docs copy.css",
     "watch": "skrt watch docs site"
   },
   "dependencies": {
@@ -24,7 +26,7 @@
   "skrt": {
     "layout": "docs",
     "layouts": "packages/skrt/lib/layouts",
-    "stylesheet": "/skrt.css"
+    "stylesheet": "/skrt.min.css"
   },
   "renovate": {
     "extends": [
@@ -36,5 +38,8 @@
     "extends": [
       "@ianwalter"
     ]
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }

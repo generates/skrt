@@ -1,5 +1,5 @@
 {
-  "name": "@generates/style",
+  "name": "@generates/styles",
   "version": "1.0.2",
   "description": "A style sheet that makes website prototypes look beautiful",
   "license": "SEE LICENSE IN LICENSE",
@@ -9,9 +9,9 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build.skrt": "postcss src/skrt.css -o site/skrt.css",
-    "copy.skrt": "cp site/skrt.css skrt.css",
-    "minify.skrt": "csso -i skrt.css -o skrt.min.css",
+    "build.skrt": "postcss src/skrt.css -o site/skrt.min.css",
+    "copy.skrt": "cp site/skrt.min.css skrt.css",
+    "minify.skrt": "csso -i skrt.css -o skrt.min.css && cp skrt.min.css site",
     "watch.skrt": "yarn build.skrt --watch",
     "build.docs": "skrt build docs site",
     "watch.docs": "skrt watch docs site",
@@ -51,6 +51,6 @@
   "skrt": {
     "layout": "docs",
     "layouts": "../skrt/lib/layouts",
-    "stylesheet": "/skrt.css"
+    "stylesheet": "/skrt.min.css"
   }
 }

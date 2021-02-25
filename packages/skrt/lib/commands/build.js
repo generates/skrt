@@ -1,6 +1,6 @@
 import util from 'util'
 import path from 'path'
-import { promises as fs, mkdirSync } from 'fs'
+import { promises as fs } from 'fs'
 import { createLogger } from '@generates/logger'
 import glob from 'glob'
 import buildFile from '../buildFile.js'
