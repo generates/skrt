@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/ianwalter/destination#readme",
   "devDependencies": {
-    "@generates/skrt": "^0.0.2",
+    "@generates/skrt": "^0.0.3",
     "@tailwindcss/typography": "^0.4.0",
     "csso-cli": "^3.0.0",
     "npm-run-all": "^4.1.5",
