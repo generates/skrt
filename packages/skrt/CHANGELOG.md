@@ -1,5 +1,11 @@
 # @generates/skrt
 
+## 0.0.3
+
+### Patch Changes
+
+- 36a8bde: Fixing require hook and watch config
+
 ## 0.0.2
 
 ### Patch Changes
