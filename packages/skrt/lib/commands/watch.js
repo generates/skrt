@@ -14,7 +14,7 @@ export default async function watch (input) {
   const watchedFiles = [
     `${srcDir}/**/*.(mdx|jsx)`,
     `${outDir}/**/*.(css|js)`,
-    input.layouts
+    ...input.layouts ? [input.layouts] : []
   ]
   bs.watch(watchedFiles, async (event, file) => {
     logger.debug('Watch event', { event, file })
