@@ -17,5 +17,7 @@ jobs:
         run: yarn
       - name: Lint
         run: yarn lint
-      # - name: Test
-      #   run: yarn test:ci
+      - name: Build
+        run: yarn build
+      - name: Build site
+        run: yarn build.site

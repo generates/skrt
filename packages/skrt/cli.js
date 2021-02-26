@@ -33,8 +33,7 @@ const input = cli({
     },
     stylesheet: {
       description: 'A URL for a stylsheet to be used with a layout',
-      // default: 'https://unpkg.com/@generates/skrt@1.0.0/skrt.min.css'
-      default: 'https://unpkg.com/@ianwalter/destination@1.0.2/destination.min.css'
+      default: 'https://unpkg.com/@generates/styles/skrt.min.css'
     }
   }
 })

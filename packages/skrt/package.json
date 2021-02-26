@@ -12,9 +12,6 @@
   "bin": {
     "skrt": "cli.js"
   },
-  "scripts": {
-    "build": "./cli.js build tests/fixtures/src tests/fixtures/out"
-  },
   "dependencies": {
     "@babel/core": "^7.13.1",
     "@babel/generator": "^7.13.0",

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({ children, title }) => {
+export default function Base ({ children, title }) {
   return (
     <html lang="en">
       <head>
