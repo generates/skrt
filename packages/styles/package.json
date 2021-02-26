@@ -12,7 +12,7 @@
     "build.skrt": "postcss src/skrt.css -o site/skrt.min.css",
     "copy.skrt": "cp site/skrt.min.css skrt.css",
     "minify.skrt": "csso -i skrt.css -o skrt.min.css && cp skrt.min.css site",
-    "minify.code": "csso -i code.css -o code.min.css && cp code.min.css site",
+    "minify.code": "csso -i code.css -o code.min.css",
     "watch.skrt": "yarn build.skrt --watch",
     "build.docs": "skrt build docs site",
     "watch.docs": "skrt watch docs site",
