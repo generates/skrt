@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "lint": "eslint --ext js,jsx .",
-    "copy.css": "cp packages/styles/skrt.min.css site",
+    "copy.css": "yarn build && cp packages/styles/skrt.min.css site",
     "build.docs": "skrt build docs site",
     "build.site": "run-p build.docs copy.css",
     "build": "ultra -r build",
