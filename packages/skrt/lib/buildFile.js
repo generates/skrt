@@ -42,7 +42,7 @@ addHook(
     const { code } = babel.transformSync(content, babelOptions)
     return code
   },
-  { exts: ['.jsx', '.mdx'] }
+  { exts: ['.jsx', '.mdx'], ignoreNodeModules: true }
 )
 
 export default async function buildFile (input, srcDir, outDir, file) {
