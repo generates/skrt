@@ -5,10 +5,12 @@ import { createLogger } from '@generates/logger'
 import { addHook } from 'pirates'
 import mdx from '@mdx-js/mdx'
 import babel from '@babel/core'
-import React from 'react'
 import remarkPrism from 'remark-prism'
+import remarkAbbr from 'remark-abbr'
+import React from 'react'
 import ReactDOMServer from 'react-dom/server.node.js'
 import extractDataPlugin from './extractDataPlugin.js'
+import extractTocPlugin from './extractTocPlugin.js'
 
 const babelOptions = {
   presets: [
@@ -43,7 +45,12 @@ addHook(
 
       // Configure MDX/Remark.
       const opts = {
-        remarkPlugins: [extractDataPlugin(data[file]), remarkPrism]
+        remarkPlugins: [
+          remarkPrism,
+          remarkAbbr,
+          extractDataPlugin(data[file]),
+          extractTocPlugin(data[file])
+        ]
       }
 
       // Build the content using MDX.
