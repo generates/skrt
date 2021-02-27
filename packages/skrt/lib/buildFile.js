@@ -6,6 +6,7 @@ import { addHook } from 'pirates'
 import mdx from '@mdx-js/mdx'
 import babel from '@babel/core'
 import remarkPrism from 'remark-prism'
+import remarkSlug from 'remark-slug'
 import remarkAbbr from 'remark-abbr'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server.node.js'
@@ -47,6 +48,7 @@ addHook(
       const opts = {
         remarkPlugins: [
           remarkPrism,
+          remarkSlug,
           remarkAbbr,
           extractDataPlugin(data[file]),
           extractTocPlugin(data[file])

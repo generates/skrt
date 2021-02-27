@@ -1,6 +1,31 @@
 import React from 'react'
 
-export default function Docs ({ children, input, title }) {
+function renderTocItem (node, index = 0) {
+  if (node.type === 'text') {
+    return node.value
+  } else if (node.type === 'link') {
+    return (
+      <a key={index} href={node.url}>
+        {node.children && node.children.map(renderTocItem)}
+      </a>
+    )
+  } else if (node.type === 'listItem') {
+    return (
+      <li key={index} className="-ml-1 pl-5">
+        {node.children && node.children.map(renderTocItem)}
+      </li>
+    )
+  } else if (node.type === 'list') {
+    return (
+      <ul key={index}>
+        {node.children && node.children.map(renderTocItem)}
+      </ul>
+    )
+  }
+  return node.children && node.children.map(renderTocItem)
+}
+
+export default function Docs ({ children, input, title, toc }) {
   return (
     <html lang="en">
       <head>
@@ -11,8 +36,26 @@ export default function Docs ({ children, input, title }) {
         {title && <title>{title}</title>}
       </head>
       <body>
-        <div className="container">
-          {children}
+        <div className="flex max-w-screen-xl mx-auto">
+
+          <div>
+            <div className="container">
+              {children}
+            </div>
+          </div>
+
+          <div className="w-80">
+
+            <h2 className="text-lg mt-12">
+              Contents
+            </h2>
+
+            <div className="text-base">
+              {renderTocItem(toc)}
+            </div>
+
+          </div>
+
         </div>
       </body>
     </html>
