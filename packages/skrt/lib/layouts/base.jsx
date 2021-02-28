@@ -1,15 +1,21 @@
 import React from 'react'
 
-export default function Base ({ children, title }) {
+export default function Base (props) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {title && <title>{title}</title>}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
+        {props.head
+          ? props.head
+          : props.title && <title>{props.title}</title>
+        }
       </head>
       <body>
-        {children}
+        {props.children}
       </body>
     </html>
   )
