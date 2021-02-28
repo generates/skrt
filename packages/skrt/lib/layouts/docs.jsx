@@ -45,15 +45,17 @@ export default function Docs ({ children, input, title, toc }) {
           </div>
 
           <div className="w-80">
+            <div className="w-full fixed overflow-y-auto top-0 bottom-0">
 
-            <h2 className="text-lg mt-12">
-              Contents
-            </h2>
+              <h2 className="text-lg mt-12">
+                Contents
+              </h2>
 
-            <div className="text-base">
-              {renderTocItem(toc)}
+              <div className="text-base">
+                {renderTocItem(toc)}
+              </div>
+
             </div>
-
           </div>
 
         </div>
