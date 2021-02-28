@@ -499,7 +499,7 @@ tbody td:last-child {
 @tailwind utilities;
 
 .container {
-  @apply mx-auto px-5 py-10 max-w-prose;
+  @apply mx-auto px-5 py-5 sm:py-10 max-w-prose;
 }
 
 a {

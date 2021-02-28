@@ -46,7 +46,7 @@ export default function Docs ({ children, input, title, toc }) {
             </div>
           </div>
 
-          <div className="w-40 sm:w-80 pt-5">
+          <div className="w-40 sm:w-80 pt-8">
 
             <div className="sm:hidden w-6 h-6 fixed right-5">
               <a href="#tocMenu">
@@ -58,7 +58,7 @@ export default function Docs ({ children, input, title, toc }) {
               id="tocMenu"
               className={`
                 hidden sm:block target:block fixed w-full overflow-y-auto
-                bg-white pl-5 pt-5
+                bg-white pl-5 pt-8 sm:pt-14
                 bottom-0 left-0 sm:left-auto top-0
               `}
             >
