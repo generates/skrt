@@ -79,10 +79,14 @@ export default async function buildFile (input, srcDir, outDir, file) {
     // Determine if the page needs a layout and which layout to use.
     const layout = { name: props.layout || input.layout }
     if (layout.name) {
-      layout.file = ['base', 'skrt', 'docs'].includes(layout.name)
-        ? require.resolve(`./layouts/${layout.name}.jsx`)
-        : path.resolve(input.layouts, layout.name)
-      layout.content = require(layout.file).default
+      if (['base', 'skrt', 'docs'].includes(layout.name)) {
+        layout.file = require.resolve(`./layouts/${layout.name}.jsx`)
+      } else if (layout.name.includes('.jsx')) {
+        layout.file = path.resolve(layout.name)
+      } else if (input.layouts) {
+        layout.file = path.resolve(input.layouts, layout.name)
+      }
+      if (layout.file) layout.content = require(layout.file).default
     }
 
     // Delete the file and layout file from the require cache so that it can be

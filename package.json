@@ -30,8 +30,7 @@
     "eslint": "^7.20.0"
   },
   "skrt": {
-    "layout": "Docs",
-    "layouts": "packages/skrt/lib/layouts",
+    "layout": "docs/Layout.jsx",
     "stylesheet": "/skrt.min.css"
   },
   "renovate": {
