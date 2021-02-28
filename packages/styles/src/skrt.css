@@ -101,7 +101,8 @@ h2 {
   color: #111827;
   font-weight: 700;
   font-size: 1.8em;
-  margin-top: 1.5555556em;
+  margin-top: 1.1666667em;
+  padding-top: 0.3888889em;
   margin-bottom: 0.8888889em;
   line-height: 1.1111111;
 }
@@ -110,7 +111,8 @@ h3 {
   color: #111827;
   font-weight: 600;
   font-size: 1.5em;
-  margin-top: 1.6em;
+  margin-top: 1.2em;
+  padding-top: 0.4em;
   margin-bottom: 0.6666667em;
   line-height: 1.3333333;
 }
@@ -118,7 +120,8 @@ h3 {
 h4 {
   color: #111827;
   font-weight: 600;
-  margin-top: 1.8em;
+  margin-top: 1.35em;
+  padding-top: 0.45em;
   margin-bottom: 0.6em;
   line-height: 1.6;
 }
@@ -366,18 +369,21 @@ tbody td:last-child {
 
   h2 {
     font-size: 2em;
-    margin-top: 1.5em;
+    margin-top: 1.125em;
+    padding-top: 0.375em;
     line-height: 1.0833333;
   }
 
   h3 {
     font-size: 1.5em;
-    margin-top: 1.5555556em;
+    margin-top: 1.1666667em;
+    padding-top: 0.3888889em;
     line-height: 1.2222222;
   }
 
   h4 {
-    margin-top: 1.6666667em;
+    margin-top: 1.250000025em;
+    padding-top: 0.416666675em;
     line-height: 1.5;
   }
 
@@ -500,8 +506,7 @@ a {
   @apply transition duration-150 ease-in;
 }
 a:focus:not(:active):not(.button) {
-  @apply rounded-sm outline-none;
-  box-shadow: 0 0 0 2px var(--bg-color, #fff), 0 0 0 5px #90CDF4;
+  @apply rounded-sm outline-none ring ring-offset-2;
 }
 
 a.button,
@@ -538,4 +543,8 @@ a.button,
 }
 .button.button-green:hover {
   @apply bg-green-700;
+}
+
+.target\:block:target {
+  display: block;
 }

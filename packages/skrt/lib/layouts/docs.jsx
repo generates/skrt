@@ -1,4 +1,6 @@
 import React from 'react'
+import MenuIcon from './icons/Menu.jsx'
+import CloseIcon from './icons/Close.jsx'
 
 function renderTocItem (node, index = 0) {
   if (node.type === 'text') {
@@ -17,7 +19,7 @@ function renderTocItem (node, index = 0) {
     )
   } else if (node.type === 'list') {
     return (
-      <ul key={index}>
+      <ul key={index} className="last:mb-0">
         {node.children && node.children.map(renderTocItem)}
       </ul>
     )
@@ -44,14 +46,38 @@ export default function Docs ({ children, input, title, toc }) {
             </div>
           </div>
 
-          <div className="w-80">
-            <div className="w-full fixed overflow-y-auto top-0 bottom-0">
+          <div className="w-40 sm:w-80 pt-5">
 
-              <h2 className="text-lg mt-12">
-                Contents
-              </h2>
+            <div className="sm:hidden w-6 h-6 fixed right-5">
+              <a href="#tocMenu">
+                <MenuIcon />
+              </a>
+            </div>
 
-              <div className="text-base">
+            <div
+              id="tocMenu"
+              className={`
+                hidden sm:block target:block fixed w-full overflow-y-auto
+                bg-white pl-5 pt-5
+                bottom-0 left-0 sm:left-auto top-0
+              `}
+            >
+
+              <div className="flex items-center">
+
+                <h2 className="text-lg m-0 p-0">
+                  Contents
+                </h2>
+
+                <div className="sm:hidden w-6 h-6 ml-auto mr-5">
+                  <a href="#">
+                    <CloseIcon />
+                  </a>
+                </div>
+
+              </div>
+
+              <div className="text-base mt-4">
                 {renderTocItem(toc)}
               </div>
 
