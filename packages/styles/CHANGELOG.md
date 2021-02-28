@@ -1,5 +1,11 @@
 # @ianwalter/destination
 
+## 1.2.1
+
+### Patch Changes
+
+- 5fcc76f: Improving layout padding
+
 ## 1.2.0
 
 ### Minor Changes
