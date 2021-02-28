@@ -1,5 +1,11 @@
 # @ianwalter/destination
 
+## 1.2.0
+
+### Minor Changes
+
+- 40f4ff8: Adding target:block class
+
 ## 1.1.0
 
 ### Minor Changes
