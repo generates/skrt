@@ -1,5 +1,14 @@
 # @generates/skrt
 
+## 0.0.5
+
+### Patch Changes
+
+- c3d3150: Using props.head in layouts
+- b467145: Allowing layout to be filename
+- 8ffcc9f: Catching mdx parsing error
+- 5fcc76f: Improving layout padding
+
 ## 0.0.4
 
 ### Patch Changes
