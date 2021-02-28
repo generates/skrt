@@ -65,46 +65,50 @@ addHook(
 )
 
 export default async function buildFile (input, srcDir, outDir, file) {
-  logger.debug('Build file', file)
+  try {
+    logger.debug('Build file', file)
 
-  // Require/transpile the source file into the page component's content.
-  const { default: content } = require(file)
+    // Require/transpile the source file into the page component's content.
+    const { default: content } = require(file)
 
-  // Combine the configuration input and the extracted page metadata into props
-  // that will be passed to the page component.
-  const props = { input, ...data[file] }
-  logger.debug('Props', props)
+    // Combine the configuration input and the extracted page metadata into
+    // props that will be passed to the page component.
+    const props = { input, ...data[file] }
+    logger.debug('Props', props)
 
-  // Determine if the page needs a layout and which layout to use.
-  const layout = { name: props.layout || input.layout }
-  if (layout.name) {
-    layout.file = ['base', 'skrt', 'docs'].includes(layout.name)
-      ? require.resolve(`./layouts/${layout.name}.jsx`)
-      : path.resolve(input.layouts, layout.name)
-    layout.content = require(layout.file).default
+    // Determine if the page needs a layout and which layout to use.
+    const layout = { name: props.layout || input.layout }
+    if (layout.name) {
+      layout.file = ['base', 'skrt', 'docs'].includes(layout.name)
+        ? require.resolve(`./layouts/${layout.name}.jsx`)
+        : path.resolve(input.layouts, layout.name)
+      layout.content = require(layout.file).default
+    }
+
+    // Delete the file and layout file from the require cache so that it can be
+    // updated during development.
+    delete require.cache[file]
+    delete require.cache[layout.file]
+
+    // Create the React page component with the layout, props, and content.
+    const page = layout.content
+      ? React.createElement(layout.content, props, React.createElement(content))
+      : React.createElement(content, props)
+
+    // Render the React page component into static HTML.
+    const html = ReactDOMServer.renderToStaticMarkup(page)
+
+    // Make sure the output directory exists by creating it if necessary.
+    const dir = path.join(outDir, path.relative(srcDir, path.dirname(file)))
+    mkdirSync(dir, { recursive: true })
+
+    // Write the HTML file to the filesystem.
+    const filename = path.join(dir, path.basename(file, '.mdx') + '.html')
+    await fs.writeFile(filename, `<!doctype html>${html}`)
+
+    // Return the HTML file path.
+    return filename
+  } catch (err) {
+    logger.error(err)
   }
-
-  // Delete the file and layout file from the require cache so that it can be
-  // updated during development.
-  delete require.cache[file]
-  delete require.cache[layout.file]
-
-  // Create the React page component with the layout, props, and content.
-  const page = layout.content
-    ? React.createElement(layout.content, props, React.createElement(content))
-    : React.createElement(content, props)
-
-  // Render the React page component into static HTML.
-  const html = ReactDOMServer.renderToStaticMarkup(page)
-
-  // Make sure the output directory exists by creating it if necessary.
-  const dir = path.join(outDir, path.relative(srcDir, path.dirname(file)))
-  mkdirSync(dir, { recursive: true })
-
-  // Write the HTML file to the filesystem.
-  const filename = path.join(dir, path.basename(file, '.mdx') + '.html')
-  await fs.writeFile(filename, `<!doctype html>${html}`)
-
-  // Return the HTML file path.
-  return filename
 }

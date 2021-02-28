@@ -20,10 +20,11 @@ export default async function watch (input) {
     logger.debug('Watch event', { event, file })
     if (event === 'change') {
       if (path.extname(file) === '.mdx') {
-        bs.reload(await buildFile(input, srcDir, outDir, file))
+        const filename = await buildFile(input, srcDir, outDir, file)
+        if (filename) bs.reload(filename)
       } else {
         const { outFiles } = await build(input)
-        bs.reload(outFiles)
+        if (outFiles?.length) bs.reload(outFiles)
       }
     }
   })
