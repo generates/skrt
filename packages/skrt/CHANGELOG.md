@@ -1,5 +1,12 @@
 # @generates/skrt
 
+## 0.0.4
+
+### Patch Changes
+
+- bc84ada: Adding ToC component to docs layout
+- 40f4ff8: Making ToC component responsive
+
 ## 0.0.3
 
 ### Patch Changes
