@@ -53,8 +53,7 @@
     "tailwindcss": "^2.0.3"
   },
   "skrt": {
-    "layout": "docs",
-    "layouts": "../skrt/lib/layouts",
+    "layout": "Docs",
     "stylesheet": "/skrt.min.css"
   }
 }
