@@ -31,6 +31,7 @@
   },
   "skrt": {
     "layout": "docs/Layout.jsx",
+    "layouts": "packages/skrt/lib/layouts",
     "stylesheet": "/skrt.min.css"
   },
   "renovate": {

@@ -54,6 +54,7 @@
   },
   "skrt": {
     "layout": "Docs",
+    "layouts": "../skrt/lib/layouts",
     "stylesheet": "/skrt.min.css"
   }
 }

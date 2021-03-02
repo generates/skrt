@@ -4,10 +4,7 @@ import Base from './Base.jsx'
 export default function Skrt (props) {
   const head = (
     <>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/@generates/styles/skrt.min.css"
-      />
+      <link rel="stylesheet" href={props.input.stylesheet} />
       {props.head && props.head}
     </>
   )

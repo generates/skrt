@@ -101,8 +101,8 @@ h2 {
   color: #111827;
   font-weight: 700;
   font-size: 1.8em;
-  margin-top: 1.1666667em;
-  padding-top: 0.3888889em;
+  margin-top: 0.7777778em;
+  padding-top: 0.7777778em;
   margin-bottom: 0.8888889em;
   line-height: 1.1111111;
 }
@@ -111,8 +111,8 @@ h3 {
   color: #111827;
   font-weight: 600;
   font-size: 1.5em;
-  margin-top: 1.2em;
-  padding-top: 0.4em;
+  margin-top: 0.8em;
+  padding-top: 0.8em;
   margin-bottom: 0.6666667em;
   line-height: 1.3333333;
 }
@@ -120,8 +120,8 @@ h3 {
 h4 {
   color: #111827;
   font-weight: 600;
-  margin-top: 1.35em;
-  padding-top: 0.45em;
+  margin-top: 0.9em;
+  padding-top: 0.9em;
   margin-bottom: 0.6em;
   line-height: 1.6;
 }
@@ -369,21 +369,21 @@ tbody td:last-child {
 
   h2 {
     font-size: 2em;
-    margin-top: 1.125em;
-    padding-top: 0.375em;
+    margin-top: 0.75em;
+    padding-top: 0.75em;
     line-height: 1.0833333;
   }
 
   h3 {
     font-size: 1.5em;
-    margin-top: 1.1666667em;
-    padding-top: 0.3888889em;
+    margin-top: 0.7777778em;
+    padding-top: 0.7777778em;
     line-height: 1.2222222;
   }
 
   h4 {
-    margin-top: 1.250000025em;
-    padding-top: 0.416666675em;
+    margin-top: 0.83333335em;
+    padding-top: 0.83333335em;
     line-height: 1.5;
   }
 
@@ -499,7 +499,7 @@ tbody td:last-child {
 @tailwind utilities;
 
 .container {
-  @apply mx-auto px-5 py-5 sm:py-10 max-w-prose;
+  @apply mx-auto px-6 py-6 sm:py-8 max-w-prose;
 }
 
 a {
