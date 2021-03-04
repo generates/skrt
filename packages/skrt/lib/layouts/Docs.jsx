@@ -1,8 +1,8 @@
 import React from 'react'
 import { oneLine } from 'common-tags'
 import Skrt from './Skrt.jsx'
-import MenuIcon from '../components/icons/Menu.jsx'
-import CloseIcon from '../components/icons/Close.jsx'
+import MenuIcon from '../icons/Menu.jsx'
+import CloseIcon from '../icons/Close.jsx'
 
 function renderTocItem (node, index = 0) {
   if (node.type === 'text') {
