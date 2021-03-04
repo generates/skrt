@@ -1,5 +1,11 @@
 # @ianwalter/destination
 
+## 1.2.2
+
+### Patch Changes
+
+- a3286c4: Fixing docs layout
+
 ## 1.2.1
 
 ### Patch Changes
