@@ -1,5 +1,12 @@
 # @generates/skrt
 
+## 0.0.6
+
+### Patch Changes
+
+- ab09b67: Adding support for description in base layout without head
+- a3286c4: Fixing docs layout
+
 ## 0.0.5
 
 ### Patch Changes
