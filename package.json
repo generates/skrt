@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "eslint --ext js,jsx .",
     "copy.css": "yarn build && cp packages/styles/skrt.min.css site",
-    "build.site": "run-p build.docs copy.css",
+    "build.site": "run-p docs copy.css",
     "build": "ultra -r build",
     "docs": "skrt build docs site"
   },
