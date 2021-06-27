@@ -4,13 +4,16 @@ import { promises as fs } from 'fs'
 import { createLogger } from '@generates/logger'
 import glob from 'glob'
 import buildFile from '../buildFile.js'
+import watch from './watch.js'
 
 const ignore = 'node_modules/**'
 const globOptions = { nosort: true, nodir: true, ignore, absolute: true }
 const globAsync = util.promisify(glob)
 const logger = createLogger({ level: 'info', namespace: 'skrt.build' })
 
-export default async function build (input) {
+export default async function build (input, isCommand = true) {
+  if (input.watch && isCommand) return watch(input)
+
   const [src, out] = input.args
   logger.debug('Build args', { src, out })
 

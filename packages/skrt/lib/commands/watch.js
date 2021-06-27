@@ -7,7 +7,7 @@ import buildFile from '../buildFile.js'
 const logger = createLogger({ level: 'info', namespace: 'skrt.watch' })
 
 export default async function watch (input) {
-  const { srcDir, outDir } = await build(input)
+  const { srcDir, outDir } = await build(input, false)
 
   const bs = browserSync.create()
 

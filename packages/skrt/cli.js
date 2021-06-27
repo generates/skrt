@@ -12,7 +12,13 @@ const input = cli({
   usage: 'skrt [command] [args] [options]',
   commands: {
     build: {
-      run: skrt.build
+      run: skrt.build,
+      options: {
+        watch: {
+          aliases: ['w'],
+          description: ''
+        }
+      }
     },
     watch: {
       run: skrt.watch
