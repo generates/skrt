@@ -20,4 +20,4 @@ jobs:
       - name: Build
         run: yarn build
       - name: Build site
-        run: yarn build.site
+        run: yarn docs
