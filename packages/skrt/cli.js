@@ -12,7 +12,7 @@ const input = cli({
   usage: 'skrt [command] [args] [options]',
   commands: {
     build: {
-      usage: 'skrt build [source] [output] [options]'
+      usage: 'skrt build [source] [output] [options]',
       run: skrt.build,
       options: {
         watch: {
@@ -22,7 +22,7 @@ const input = cli({
       }
     },
     watch: {
-      usage: 'skrt watch [source] [output] [options]'
+      usage: 'skrt watch [source] [output] [options]',
       run: skrt.watch
     },
     serve: {
