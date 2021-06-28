@@ -1,5 +1,11 @@
 # @generates/skrt
 
+## 0.0.7
+
+### Patch Changes
+
+- f6193a0: Adding --watch flag to build command
+
 ## 0.0.6
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@generates/skrt",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A React/MDX static site generator (SSG) with launch control",
   "author": {
     "name": "Ian Walter",
