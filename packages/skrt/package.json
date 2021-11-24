@@ -17,7 +17,7 @@
     "@babel/generator": "^7.14.5",
     "@babel/parser": "^7.14.7",
     "@babel/preset-env": "^7.14.7",
-    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-react": "^7.16.0",
     "@babel/traverse": "^7.14.7",
     "@generates/cli": "^1.0.3",
     "@generates/logger": "^1.0.0",
