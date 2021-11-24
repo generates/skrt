@@ -18,7 +18,7 @@
     "@babel/parser": "^7.14.7",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.16.0",
-    "@babel/traverse": "^7.14.7",
+    "@babel/traverse": "^7.16.3",
     "@generates/cli": "^1.0.3",
     "@generates/logger": "^1.0.0",
     "@mdx-js/mdx": "^1.6.22",
