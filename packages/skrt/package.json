@@ -25,7 +25,7 @@
     "@mdx-js/react": "^1.6.22",
     "browser-sync": "^2.27.4",
     "common-tags": "^1.8.0",
-    "glob": "^7.1.7",
+    "glob": "^7.2.0",
     "mdast-util-toc": "^5.1.0",
     "pirates": "^4.0.1",
     "polka": "^0.5.2",
