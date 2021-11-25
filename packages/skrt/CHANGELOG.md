@@ -1,5 +1,18 @@
 # @generates/skrt
 
+## 0.0.8
+
+### Patch Changes
+
+- 0c5ac11: Update dependency @babel/core to ^7.16.0
+- 3ff07de: Update dependency browser-sync to ^2.27.7
+- a974a59: Update dependency common-tags to ^1.8.2
+- 9333ee4: Update dependency sirv to ^1.0.18
+- 87cfad5: Updating cli to v2
+- 519170d: Update dependency @babel/generator to ^7.16.0
+- 92fe8c9: Update dependency @babel/preset-react to ^7.16.0
+- a6308a3: Updating logger to 2.0.4
+
 ## 0.0.7
 
 ### Patch Changes
