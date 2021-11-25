@@ -25,13 +25,25 @@
   "devDependencies": {
     "@changesets/cli": "^2.17.0",
     "@ianwalter/eslint-config-react": "^5.1.1",
-    "@ianwalter/renovate-config": "^1.4.6",
-    "eslint": "^7.20.0"
+    "@ianwalter/renovate-config": "^1.4.6"
   },
   "skrt": {
     "layout": "docs/Layout.jsx",
     "layouts": "packages/skrt/lib/layouts",
     "stylesheet": "/skrt.min.css"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "@babel/preset-react"
+    ]
   },
   "renovate": {
     "extends": [
@@ -42,6 +54,14 @@
     "root": true,
     "extends": [
       "@ianwalter/react"
-    ]
+    ],
+    "parserOptions": {
+      "babelOptions": {
+        "babelrcRoots": [
+          "./",
+          "./packages/*"
+        ]
+      }
+    }
   }
 }
